@@ -12,9 +12,7 @@ unsigned get_bit(unsigned x, unsigned n) {
     // 0 or 1)
     return (x>>n) & 1;
 }
-void set_bit(unsigned * x,
-             unsigned n,
-             unsigned v) {
+void set_bit(unsigned * x, unsigned n, unsigned v) {
     int mask = ~(1 << n);
     *x = *x & mask;
     int vee = (v << n);
@@ -58,7 +56,7 @@ int get_branch_offset(Instruction instruction) {
     }
     set_bit( return_val, 10, get_bit(instruction.sbtype.imm5, 0));
     set_bit( return_val, 11, get_bit(instruction.sbtype.imm7, 6));
-    return sign_extend_number((return_val) * 2,13);
+    return sign_extend_number((*return_val) * 2,13);
 }
 /* Returns the number of bytes (from the current PC) to the jump label using the given
  * jump instruction */
@@ -80,7 +78,7 @@ int get_jump_offset(Instruction instruction) {
         j++;
     }
     set_bit(return_val, 19, get_bit(instruction.ujtype.imm, 19));
-    return sign_extend_number(return_val * 2, 21);
+    return sign_extend_number((*return_val) * 2, 21);
     }
 
 int get_store_offset(Instruction instruction) {
@@ -99,7 +97,7 @@ int get_store_offset(Instruction instruction) {
         set_bit(return_val, j, get_bit(instruction.stype.imm7,(unsigned) list2[i2]));
         j++;
     }
-    return sign_extend_number(return_val, 12);
+    return sign_extend_number(*return_val, 12);
 }
 
 void handle_invalid_instruction(Instruction instruction) {
