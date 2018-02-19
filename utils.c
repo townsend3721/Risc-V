@@ -45,20 +45,16 @@ int get_branch_offset(Instruction instruction) {
         unsigned int bits : 12;
     };
     struct bit_field *bitField0 = (struct bit_field *) malloc(sizeof(struct bit_field));
-    unsigned int list1[4] = {1,2,3,4};
-    int i1;
-    for (i1 = 0; i1 < 4; i1++) {
-        unsigned int j = 0;
-        bitField0->bits = set_bit( (bitField0)->bits, j, get_bit(instruction.sbtype.imm5, list1[i1]));
-        j++;
-    }
-    unsigned int list2[6] = {0,1,2,3,4,5};
-    int i2;
-    for (i2 = 0; i2 < 6; i2++) {
-        unsigned int j = 4;
-        bitField0->bits = set_bit(bitField0->bits, j, get_bit(instruction.sbtype.imm7, list2[i2]));
-        j++;
-    }
+    bitField0->bits = set_bit( bitField0->bits, 0, get_bit(instruction.sbtype.imm5, 1));
+    bitField0->bits = set_bit( bitField0->bits, 1, get_bit(instruction.sbtype.imm5, 2));
+    bitField0->bits = set_bit( bitField0->bits, 2, get_bit(instruction.sbtype.imm5, 3));
+    bitField0->bits = set_bit( bitField0->bits, 3, get_bit(instruction.sbtype.imm5, 4));
+    bitField0->bits = set_bit( bitField0->bits, 4, get_bit(instruction.sbtype.imm7, 0));
+    bitField0->bits = set_bit( bitField0->bits, 5, get_bit(instruction.sbtype.imm7, 1));
+    bitField0->bits = set_bit( bitField0->bits, 6, get_bit(instruction.sbtype.imm7, 2));
+    bitField0->bits = set_bit( bitField0->bits, 7, get_bit(instruction.sbtype.imm7, 3));
+    bitField0->bits = set_bit( bitField0->bits, 8, get_bit(instruction.sbtype.imm7, 4));
+    bitField0->bits = set_bit( bitField0->bits, 9, get_bit(instruction.sbtype.imm7, 5));
     bitField0->bits = set_bit( bitField0->bits, 10, get_bit(instruction.sbtype.imm5, 0));
     bitField0->bits = set_bit( bitField0->bits, 11, get_bit(instruction.sbtype.imm7, 6));
     return sign_extend_number((bitField0->bits) * 2,13);
