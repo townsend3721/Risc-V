@@ -46,15 +46,15 @@ int get_branch_offset(Instruction instruction) {
     };
     struct bit_field *bitField0 = (struct bit_field *) malloc(sizeof(struct bit_field));
     int list1[4] = {1,2,3,4};
-    int i1 = 0;
-    for (i1; i1 < 4; i1++) {
+    int i1;
+    for (i1 = 0; i1 < 4; i1++) {
         unsigned int j = 0;
         set_bit( bitField0->bits, j, get_bit(instruction.sbtype.imm5,(unsigned) list1[i1]));
         j++;
     }
     int list2[6] = {0,1,2,3,4,5};
-    int i2 = 0;
-    for (i2; i2 < 6; i2++) {
+    int i2;
+    for (i2 = 0; i2 < 6; i2++) {
         unsigned int j = 4;
         set_bit( bitField0->bits, j, get_bit(instruction.sbtype.imm7,(unsigned) list2[i2]));
         j++;
@@ -72,17 +72,17 @@ int get_jump_offset(Instruction instruction) {
     struct bit_field *bitField1 = (struct bit_field *) malloc(sizeof(struct bit_field));
     int list1[10] = {9,10,11,12,13,14,15,16,17,18};
     int list2 [8] = {0,1,2,3,4,5,6,7};
-    int i1 = 0;
-    for (i1; i1 < 10; i1++) {
+    int i1;
+    for (i1 = 0; i1 < 10; i1++) {
         unsigned int j = 0;
         set_bit(bitField1->bits, j, get_bit(instruction.ujtype.imm,(unsigned) list1[i1]));
         j++;
     }
     set_bit(bitField1->bits, 10, get_bit(instruction.ujtype.imm, 8));
-    int i2 = 0;
-    for (i1; i2 < 8; i2++) {
+    int i2;
+    for (i2 = 0; i2 < 8; i2++) {
         unsigned int j = 11;
-        set_bit(bitField1->bits, j, get_bit(instruction.ujtype.imm,(unsigned) i));
+        set_bit(bitField1->bits, j, get_bit(instruction.ujtype.imm,(unsigned) list2[i2]));
         j++;
     }
     set_bit(bitField1->bits, 19, get_bit(instruction.ujtype.imm, 19));
@@ -96,14 +96,14 @@ int get_store_offset(Instruction instruction) {
     struct bit_field *bitField2 = (struct bit_field *) malloc(sizeof(struct bit_field));
     int list1[5] = {0,1,2,3,4};
     int list2[7] = {0,1,2,3,4,5,6};
-    int i1 = 0;
-    for (i1; i1 < 5; i1++) {
+    int i1;
+    for (i1 = 0; i1 < 5; i1++) {
         unsigned int j = 0;
         set_bit(bitField2->bits, j, get_bit(instruction.stype.imm5,(unsigned) list1[i1]));
         j++;
     }
-    int i2 = 0;
-    for (i2; i2 < 5; i2++) {
+    int i2;
+    for (i2 = 0; i2 < 5; i2++) {
         unsigned int j = 5;
         set_bit(bitField2->bits, j, get_bit(instruction.stype.imm7,(unsigned) list2[i2]));
         j++;
