@@ -42,8 +42,8 @@ Instruction parse_instruction(uint32_t instruction_bits) {
  * branch instruction */
 int get_branch_offset(Instruction instruction) {
     unsigned int return_val = 0;
-    int list1[4] = {1,2,3,4};
-    int i1;
+    unsigned int list1[4] = {1,2,3,4};
+    unsigned int i1;
     for (i1 = 0; i1 < 4; i1++) {
         unsigned int j = 0;
         set_bit( return_val, j, get_bit(instruction.sbtype.imm5,(unsigned) list1[i1]));
@@ -63,13 +63,13 @@ int get_branch_offset(Instruction instruction) {
 /* Returns the number of bytes (from the current PC) to the jump label using the given
  * jump instruction */
 int get_jump_offset(Instruction instruction) {
-    unsigned int return_val = 1;
-    int list1[10] = {9,10,11,12,13,14,15,16,17,18};
-    int list2 [8] = {0,1,2,3,4,5,6,7};
+    unsigned int return_val = 0;
+    unsigned int list1[10] = {9,10,11,12,13,14,15,16,17,18};
+    unsigned int list2 [8] = {0,1,2,3,4,5,6,7};
     int i1;
     for (i1 = 0; i1 < 10; i1++) {
         unsigned int j = 0;
-        set_bit(return_val, j, get_bit(instruction.ujtype.imm,(unsigned) list1[i1]));
+        set_bit(return_val, j, get_bit(instruction.ujtype.imm, list1[i1]));
         j++;
     }
     set_bit(return_val, 10, get_bit(instruction.ujtype.imm, 8));
@@ -85,8 +85,8 @@ int get_jump_offset(Instruction instruction) {
 
 int get_store_offset(Instruction instruction) {
     unsigned int return_val = 0;
-    int list1[5] = {0,1,2,3,4};
-    int list2[7] = {0,1,2,3,4,5,6};
+    unsigned int list1[5] = {0,1,2,3,4};
+    unsigned int list2[7] = {0,1,2,3,4,5,6};
     int i1;
     for (i1 = 0; i1 < 5; i1++) {
         unsigned int j = 0;
