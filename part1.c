@@ -228,7 +228,7 @@ void print_lui(Instruction instruction) {
 
 void print_jal(Instruction instruction) {
     unsigned int offset1 = get_jump_offset(instruction);
-    fprintf(stdout, "jal\tx%u, %i\n", instruction.ujtype.rd, offset1;
+    fprintf(stdout, "jal\tx%u, %i\n", instruction.ujtype.rd, offset1);
 }
 
 void print_ecall(Instruction instruction) {
