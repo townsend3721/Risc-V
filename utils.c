@@ -12,13 +12,13 @@ unsigned get_bit(unsigned x, unsigned n) {
     // 0 or 1)
     return (x>>n) & 1;
 }
-void set_bit(unsigned * x,
+void set_bit(unsigned x,
              unsigned n,
              unsigned v) {
     int mask = ~(1 << n);
-    *x = *x & mask;
+    x = x & mask;
     int vee = (v << n);
-    *x = *x | vee;
+    x = x | vee;
 
 }
 int sign_extend_number( unsigned int field, unsigned int n) {
@@ -42,7 +42,7 @@ Instruction parse_instruction(uint32_t instruction_bits) {
  * branch instruction */
 int get_branch_offset(Instruction instruction) {
     struct bit_field {
-        unsigned int *bits : 12;
+        unsigned int bits : 12;
     };
     struct bit_field *bitField0 = (struct bit_field *) malloc(sizeof(struct bit_field));
     int list1[4] = {1,2,3,4};
@@ -61,13 +61,13 @@ int get_branch_offset(Instruction instruction) {
     }
     set_bit( bitField0->bits, 10, get_bit(instruction.sbtype.imm5, 0));
     set_bit( bitField0->bits, 11, get_bit(instruction.sbtype.imm7, 6));
-    return sign_extend_number((*(bitField0->bits)) * 2,13);
+    return sign_extend_number((bitField0->bits) * 2,13);
 }
 /* Returns the number of bytes (from the current PC) to the jump label using the given
  * jump instruction */
 int get_jump_offset(Instruction instruction) {
     struct bit_field {
-        unsigned int *bits : 20;
+        unsigned int bits : 20;
     };
     struct bit_field *bitField1 = (struct bit_field *) malloc(sizeof(struct bit_field));
     int list1[10] = {9,10,11,12,13,14,15,16,17,18};
@@ -86,12 +86,12 @@ int get_jump_offset(Instruction instruction) {
         j++;
     }
     set_bit(bitField1->bits, 19, get_bit(instruction.ujtype.imm, 19));
-    return sign_extend_number((*(bitField1->bits)) * 2, 21);
+    return sign_extend_number((bitField1->bits) * 2, 21);
     }
 
 int get_store_offset(Instruction instruction) {
     struct bit_field {
-        unsigned int *bits : 12;
+        unsigned int bits : 12;
     };
     struct bit_field *bitField2 = (struct bit_field *) malloc(sizeof(struct bit_field));
     int list1[5] = {0,1,2,3,4};
@@ -108,7 +108,7 @@ int get_store_offset(Instruction instruction) {
         set_bit(bitField2->bits, j, get_bit(instruction.stype.imm7,(unsigned) list2[i2]));
         j++;
     }
-    return sign_extend_number((*(bitField2->bits)) * 2, 12);
+    return sign_extend_number((bitField2->bits) * 2, 12);
 }
 
 void handle_invalid_instruction(Instruction instruction) {
