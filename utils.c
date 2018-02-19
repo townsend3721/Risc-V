@@ -63,7 +63,7 @@ int get_branch_offset(Instruction instruction) {
 /* Returns the number of bytes (from the current PC) to the jump label using the given
  * jump instruction */
 int get_jump_offset(Instruction instruction) {
-    unsigned int return_val = 0;
+    unsigned int return_val = 1;
     int list1[10] = {9,10,11,12,13,14,15,16,17,18};
     int list2 [8] = {0,1,2,3,4,5,6,7};
     int i1;
