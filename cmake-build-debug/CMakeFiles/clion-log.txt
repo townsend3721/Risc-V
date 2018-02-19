@@ -1,0 +1,35 @@
+/Applications/CLion.app/Contents/bin/cmake/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /Users/townsendsaunders3/cs61c/projects/proj2/sp18-proj2-starter
+-- The C compiler identification is unknown
+-- The CXX compiler identification is unknown
+CMake Error at CMakeLists.txt:2 (project):
+  The CMAKE_C_COMPILER:
+
+    /Library/Developer/CommandLineTools/usr/bin/cc
+
+  is not a full path to an existing compiler tool.
+
+  Tell CMake where to find the compiler by setting either the environment
+  variable "CC" or the CMake cache entry CMAKE_C_COMPILER to the full path to
+  the compiler, or to the compiler name if it is in the PATH.
+
+
+CMake Error at CMakeLists.txt:2 (project):
+  The CMAKE_CXX_COMPILER:
+
+    /Library/Developer/CommandLineTools/usr/bin/c++
+
+  is not a full path to an existing compiler tool.
+
+  Tell CMake where to find the compiler by setting either the environment
+  variable "CXX" or the CMake cache entry CMAKE_CXX_COMPILER to the full path
+  to the compiler, or to the compiler name if it is in the PATH.
+
+
+-- Configuring incomplete, errors occurred!
+See also "/Users/townsendsaunders3/cs61c/projects/proj2/sp18-proj2-starter/cmake-build-debug/CMakeFiles/CMakeOutput.log".
+See also "/Users/townsendsaunders3/cs61c/projects/proj2/sp18-proj2-starter/cmake-build-debug/CMakeFiles/CMakeError.log".
+Cannot read /Users/townsendsaunders3/cs61c/projects/proj2/sp18-proj2-starter/cmake-build-debug/CMakeFiles/3.9.6/CMakeCCompiler.cmake
+Cannot read /Users/townsendsaunders3/cs61c/projects/proj2/sp18-proj2-starter/cmake-build-debug/CMakeFiles/3.9.6/CMakeCXXCompiler.cmake
+
+Cannot get compiler information:
+	Cannot run program "/Library/Developer/CommandLineTools/usr/bin/cc" (in directory "/Users/townsendsaunders3/cs61c/projects/proj2/sp18-proj2-starter/cmake-build-debug"): error=2, No such file or directory

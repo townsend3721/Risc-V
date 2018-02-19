@@ -223,33 +223,35 @@ void write_branch(Instruction instruction) {
 }
 
 void print_lui(Instruction instruction) {
-    /* YOUR CODE HERE */
+    fprintf(stdout, "lui\tx%u, %i\n", instruction.utype.rd, instruction.utype.imm);
 }
 
 void print_jal(Instruction instruction) {
-    /* YOUR CODE HERE */
+    unsigned int offset1 = get_jump_offset(instruction);
+    fprintf(stdout, "jal\tx%u, %i\n", instruction.ujtype.rd, offset1;
 }
 
 void print_ecall(Instruction instruction) {
-    /* YOUR CODE HERE */
+    fprintf(stdout, "ecall\n");
 }
 
 void print_rtype(char *name, Instruction instruction) {
-    /* YOUR CODE HERE */
+    fprintf(stdout, "%s\tx%u, x%u, x%u\n", name, instruction.rtype.rd, instruction.rtype.rs1, instruction.rtype.rs2);
 }
 
 void print_itype_except_load(char *name, Instruction instruction, int imm) {
-    /* YOUR CODE HERE */
+    fprintf(stdout, "%s\tx%u, x%u, %i\n", name, instruction.itype.rd, instruction.itype.rs1, sign_extend_number(imm, 12));
 }
 
 void print_load(char *name, Instruction instruction) {
-    /* YOUR CODE HERE */
+    fprintf(stdout, "%s\tx%u, %i(x%u)\n", name, instruction.itype.rd, sign_extend_number(instruction.itype.imm, 12), instruction.itype.rs1);
 }
 
 void print_store(char *name, Instruction instruction) {
-    /* YOUR CODE HERE */
+    unsigned int offset2 = get_store_offset(instruction);
+    fprintf(stdout, "%s\tx%u, %i(x%u)\n", name, instruction.stype.rs2, offset2, instruction.stype.rs1);
 }
 
 void print_branch(char *name, Instruction instruction) {
-    /* YOUR CODE HERE */
+    fprintf(stdout, "%s\tx%u, x%u, %i\n", name, instruction.sbtype.rs1, instruction.sbtype.rs2, get_branch_offset(instruction));
 }
