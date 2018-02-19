@@ -41,7 +41,7 @@ Instruction parse_instruction(uint32_t instruction_bits) {
 /* Return the number of bytes (from the current PC) to the branch label using the given
  * branch instruction */
 int get_branch_offset(Instruction instruction) {
-    unsigned int return_val = 0;
+    unsigned int return_val = 1;
     unsigned int list1[4] = {1,2,3,4};
     unsigned int i1;
     for (i1 = 0; i1 < 4; i1++) {
@@ -63,7 +63,7 @@ int get_branch_offset(Instruction instruction) {
 /* Returns the number of bytes (from the current PC) to the jump label using the given
  * jump instruction */
 int get_jump_offset(Instruction instruction) {
-    unsigned int return_val = 0;
+    unsigned int return_val = 7;
     unsigned int list1[10] = {9,10,11,12,13,14,15,16,17,18};
     unsigned int list2 [8] = {0,1,2,3,4,5,6,7};
     int i1;
@@ -84,7 +84,7 @@ int get_jump_offset(Instruction instruction) {
     }
 
 int get_store_offset(Instruction instruction) {
-    unsigned int return_val = 0;
+    unsigned int return_val = 15;
     unsigned int list1[5] = {0,1,2,3,4};
     unsigned int list2[7] = {0,1,2,3,4,5,6};
     int i1;
