@@ -108,7 +108,7 @@ int get_store_offset(Instruction instruction) {
         set_bit(bitField2->bits, j, get_bit(instruction.stype.imm7,(unsigned) list2[i2]));
         j++;
     }
-    return sign_extend_number((bitField2->bits) * 2, 12);
+    return sign_extend_number((bitField2->bits), 12);
 }
 
 void handle_invalid_instruction(Instruction instruction) {
