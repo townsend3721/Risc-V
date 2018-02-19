@@ -12,7 +12,7 @@ unsigned get_bit(unsigned x, unsigned n) {
     // 0 or 1)
     return (x>>n) & 1;
 }
-void set_bit(unsigned * x, unsigned n, unsigned v) {
+void set_bit(unsigned *x, unsigned n, unsigned v) {
     int mask = ~(1 << n);
     *x = *x & mask;
     int vee = (v << n);
@@ -44,14 +44,14 @@ int get_branch_offset(Instruction instruction) {
     unsigned int i1;
     for (i1 = 0; i1 < 4; i1++) {
         unsigned int j = 0;
-        set_bit( return_val, j, get_bit(instruction.sbtype.imm5,(unsigned) list1[i1]));
+        set_bit( return_val, j, get_bit(instruction.sbtype.imm5,list1[i1]));
         j++;
     }
-    int list2[6] = {0,1,2,3,4,5};
-    int i2;
+    unsigned int list2[6] = {0,1,2,3,4,5};
+    unsigned int i2;
     for (i2 = 0; i2 < 6; i2++) {
         unsigned int j = 4;
-        set_bit(return_val, j, get_bit(instruction.sbtype.imm7,(unsigned) list2[i2]));
+        set_bit(return_val, j, get_bit(instruction.sbtype.imm7,list2[i2]));
         j++;
     }
     set_bit( return_val, 10, get_bit(instruction.sbtype.imm5, 0));
@@ -71,10 +71,10 @@ int get_jump_offset(Instruction instruction) {
         j++;
     }
     set_bit(return_val, 10, get_bit(instruction.ujtype.imm, 8));
-    int i2;
+    unsigned int i2;
     for (i2 = 0; i2 < 8; i2++) {
         unsigned int j = 11;
-        set_bit(return_val, j, get_bit(instruction.ujtype.imm,(unsigned) list2[i2]));
+        set_bit(return_val, j, get_bit(instruction.ujtype.imm,list2[i2]));
         j++;
     }
     set_bit(return_val, 19, get_bit(instruction.ujtype.imm, 19));
@@ -88,13 +88,13 @@ int get_store_offset(Instruction instruction) {
     int i1;
     for (i1 = 0; i1 < 5; i1++) {
         unsigned int j = 0;
-        set_bit(return_val, j, get_bit(instruction.stype.imm5,(unsigned) list1[i1]));
+        set_bit(return_val, j, get_bit(instruction.stype.imm5,list1[i1]));
         j++;
     }
-    int i2;
+    unsigned int i2;
     for (i2 = 0; i2 < 5; i2++) {
         unsigned int j = 5;
-        set_bit(return_val, j, get_bit(instruction.stype.imm7,(unsigned) list2[i2]));
+        set_bit(return_val, j, get_bit(instruction.stype.imm7,list2[i2]));
         j++;
     }
     return sign_extend_number(*return_val, 12);
