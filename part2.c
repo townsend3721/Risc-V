@@ -12,7 +12,6 @@ void execute_load(Instruction, Processor *, Byte *);
 void execute_store(Instruction, Processor *, Byte *);
 void execute_ecall(Processor *, Byte *);
 void execute_lui(Instruction, Processor *);
-
 void execute_instruction(uint32_t instruction_bits, Processor *processor,Byte *memory) {    
     Instruction instruction = parse_instruction(instruction_bits);
     switch(instruction.opcode) {
@@ -250,6 +249,22 @@ void store(Byte *memory, Address address, Alignment alignment, Word value) {
 }
 
 Word load(Byte *memory, Address address, Alignment alignment) {
-    /* YOUR CODE HERE */
-    return 0;
+    Word loaded = 0;
+    if (alignment == 4){
+        Byte byte1 = memory[address];
+        Byte byte2 = memory[address +1]<<8;
+        Byte byte3 = memory[address +2]<<16;
+        Byte byte4 = memory[address +3]<<24;
+        loaded = byte1 | byte2 | byte3 | byte4;
+   }
+    else if (alignment == 2) {
+        Byte byte1 = memory[address];
+        Byte byte2 = memory[address +1]<<8;
+        loaded = byte1 | byte2;
+    }
+    else if (alignment == 1) {
+        Byte byte1 = memory[address];
+        loaded = byte1;
+    }
+    return loaded;
 }
