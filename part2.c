@@ -245,7 +245,15 @@ void execute_lui(Instruction instruction, Processor *processor) {
 }
 
 void store(Byte *memory, Address address, Alignment alignment, Word value) {
-    /* YOUR CODE HERE */
+    memory[address] = value;
+    if (alignment == 4){
+        memory[address + 1] = value >> 8;
+        memory[address + 2] = value >> 16;
+        memory[address + 3] = value >> 24;
+    }
+    else if (alignment == 2) {
+        memory[address + 1] = value >> 8;
+    }
 }
 
 Word load(Byte *memory, Address address, Alignment alignment) {

@@ -28,7 +28,7 @@
       <file leaf-file-name="part1.c" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/part1.c">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-3025">
+            <state relative-caret-position="-3103">
               <caret line="21" column="29" lean-forward="false" selection-start-line="21" selection-start-column="29" selection-end-line="21" selection-end-column="29" />
               <folding />
             </state>
@@ -48,8 +48,8 @@
       <file leaf-file-name="part2.c" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/part2.c">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="439">
-              <caret line="270" column="0" lean-forward="true" selection-start-line="270" selection-start-column="0" selection-end-line="270" selection-end-column="0" />
+            <state relative-caret-position="295">
+              <caret line="259" column="16" lean-forward="true" selection-start-line="259" selection-start-column="16" selection-end-line="259" selection-end-column="16" />
               <folding>
                 <element signature="e#0#32#0" expanded="true" />
               </folding>
@@ -70,8 +70,8 @@
       <file leaf-file-name="types.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/types.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="175">
-              <caret line="36" column="12" lean-forward="false" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="12" />
+            <state relative-caret-position="-442">
+              <caret line="18" column="0" lean-forward="true" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -179,6 +179,24 @@
             <path>
               <item name="sp18_proj2_starter" type="dad4c3:CidrFilesViewHelper$MyProjectTreeStructure$1" />
               <item name="sp18-proj2-starter" type="462c0819:PsiDirectoryNode" />
+              <item name="cmake-build-debug" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="sp18_proj2_starter" type="dad4c3:CidrFilesViewHelper$MyProjectTreeStructure$1" />
+              <item name="sp18-proj2-starter" type="462c0819:PsiDirectoryNode" />
+              <item name="cmake-build-debug" type="462c0819:PsiDirectoryNode" />
+              <item name="CMakeFiles" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="sp18_proj2_starter" type="dad4c3:CidrFilesViewHelper$MyProjectTreeStructure$1" />
+              <item name="sp18-proj2-starter" type="462c0819:PsiDirectoryNode" />
+              <item name="cmake-build-debug" type="462c0819:PsiDirectoryNode" />
+              <item name="CMakeFiles" type="462c0819:PsiDirectoryNode" />
+              <item name="sp18_proj2_starter.dir" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="sp18_proj2_starter" type="dad4c3:CidrFilesViewHelper$MyProjectTreeStructure$1" />
+              <item name="sp18-proj2-starter" type="462c0819:PsiDirectoryNode" />
               <item name="riscvcode" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -242,7 +260,7 @@
       <workItem from="1519336967701" duration="79000" />
       <workItem from="1519337059283" duration="10000" />
       <workItem from="1519337099041" duration="140000" />
-      <workItem from="1519337278767" duration="5836000" />
+      <workItem from="1519337278767" duration="7080000" />
     </task>
     <task id="LOCAL-00001" summary="&quot; test load&quot;">
       <created>1519347008163</created>
@@ -255,7 +273,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="31367000" />
+    <option name="totallyTimeSpent" value="32611000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -296,22 +314,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/utils.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="19" lean-forward="false" selection-start-line="4" selection-start-column="19" selection-end-line="4" selection-end-column="39" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/riscv.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/test_utils.c">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
@@ -627,13 +629,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Makefile">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-238">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/utils.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
@@ -666,10 +661,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/part1.c">
+    <entry file="file://$PROJECT_DIR$/cmake-build-debug/CMakeFiles/sp18_proj2_starter.dir/build.make">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3025">
-          <caret line="21" column="29" lean-forward="false" selection-start-line="21" selection-start-column="29" selection-end-line="21" selection-end-column="29" />
+        <state relative-caret-position="-2473">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile2">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1183">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Makefile">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -682,18 +693,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/part1.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3103">
+          <caret line="21" column="29" lean-forward="false" selection-start-line="21" selection-start-column="29" selection-end-line="21" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/types.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="175">
-          <caret line="36" column="12" lean-forward="false" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="12" />
+        <state relative-caret-position="-442">
+          <caret line="18" column="0" lean-forward="true" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/part2.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="439">
-          <caret line="270" column="0" lean-forward="true" selection-start-line="270" selection-start-column="0" selection-end-line="270" selection-end-column="0" />
+        <state relative-caret-position="295">
+          <caret line="259" column="16" lean-forward="true" selection-start-line="259" selection-start-column="16" selection-end-line="259" selection-end-column="16" />
           <folding>
             <element signature="e#0#32#0" expanded="true" />
           </folding>
