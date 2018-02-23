@@ -17,14 +17,6 @@ void test_store();
 
 int main(int arc, char **argv) {
     CU_pSuite pSuite1 = NULL;
-    if(!CU_add_test(pSuite1, "test_load", test_load)) {
-        goto exit;
-    }
-
-    if(!CU_add_test(pSuite1, "test_store", test_store)) {
-        goto exit;
-    }
-
 
     if (CUE_SUCCESS != CU_initialize_registry()) {
         return CU_get_error();
@@ -34,7 +26,13 @@ int main(int arc, char **argv) {
     if (!pSuite1) {
         goto exit;
     }
+    if(!CU_add_test(pSuite1, "test_load", test_load)) {
+        goto exit;
+    }
 
+    if(!CU_add_test(pSuite1, "test_store", test_store)) {
+        goto exit;
+    }
     if (!CU_add_test(pSuite1, "test_sign_extend_number", test_sign_extend_number)) {
         goto exit;
     }
