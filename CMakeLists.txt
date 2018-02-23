@@ -8,7 +8,6 @@ add_executable(sp18_proj2_starter
         part2.c
         riscv.c
         riscv.h
-        test_utils.c
         types.h
         utils.c
         utils.h)

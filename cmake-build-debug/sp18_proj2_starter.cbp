@@ -94,9 +94,6 @@
 		<Unit filename="/Users/townsendsaunders3/cs61c/projects/proj2/sp18-proj2-starter/riscv.h">
 			<Option target="sp18_proj2_starter"/>
 		</Unit>
-		<Unit filename="/Users/townsendsaunders3/cs61c/projects/proj2/sp18-proj2-starter/test_utils.c">
-			<Option target="sp18_proj2_starter"/>
-		</Unit>
 		<Unit filename="/Users/townsendsaunders3/cs61c/projects/proj2/sp18-proj2-starter/types.h">
 			<Option target="sp18_proj2_starter"/>
 		</Unit>

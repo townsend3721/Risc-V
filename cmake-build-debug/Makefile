@@ -204,33 +204,6 @@ riscv.c.s:
 	$(MAKE) -f CMakeFiles/sp18_proj2_starter.dir/build.make CMakeFiles/sp18_proj2_starter.dir/riscv.c.s
 .PHONY : riscv.c.s
 
-test_utils.o: test_utils.c.o
-
-.PHONY : test_utils.o
-
-# target to build an object file
-test_utils.c.o:
-	$(MAKE) -f CMakeFiles/sp18_proj2_starter.dir/build.make CMakeFiles/sp18_proj2_starter.dir/test_utils.c.o
-.PHONY : test_utils.c.o
-
-test_utils.i: test_utils.c.i
-
-.PHONY : test_utils.i
-
-# target to preprocess a source file
-test_utils.c.i:
-	$(MAKE) -f CMakeFiles/sp18_proj2_starter.dir/build.make CMakeFiles/sp18_proj2_starter.dir/test_utils.c.i
-.PHONY : test_utils.c.i
-
-test_utils.s: test_utils.c.s
-
-.PHONY : test_utils.s
-
-# target to generate assembly for a file
-test_utils.c.s:
-	$(MAKE) -f CMakeFiles/sp18_proj2_starter.dir/build.make CMakeFiles/sp18_proj2_starter.dir/test_utils.c.s
-.PHONY : test_utils.c.s
-
 utils.o: utils.c.o
 
 .PHONY : utils.o
@@ -276,9 +249,6 @@ help:
 	@echo "... riscv.o"
 	@echo "... riscv.i"
 	@echo "... riscv.s"
-	@echo "... test_utils.o"
-	@echo "... test_utils.i"
-	@echo "... test_utils.s"
 	@echo "... utils.o"
 	@echo "... utils.i"
 	@echo "... utils.s"

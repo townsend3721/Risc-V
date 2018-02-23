@@ -7,7 +7,6 @@ set(CMAKE_DEPENDS_CHECK_C
   "/Users/townsendsaunders3/cs61c/projects/proj2/sp18-proj2-starter/part1.c" "/Users/townsendsaunders3/cs61c/projects/proj2/sp18-proj2-starter/cmake-build-debug/CMakeFiles/sp18_proj2_starter.dir/part1.c.o"
   "/Users/townsendsaunders3/cs61c/projects/proj2/sp18-proj2-starter/part2.c" "/Users/townsendsaunders3/cs61c/projects/proj2/sp18-proj2-starter/cmake-build-debug/CMakeFiles/sp18_proj2_starter.dir/part2.c.o"
   "/Users/townsendsaunders3/cs61c/projects/proj2/sp18-proj2-starter/riscv.c" "/Users/townsendsaunders3/cs61c/projects/proj2/sp18-proj2-starter/cmake-build-debug/CMakeFiles/sp18_proj2_starter.dir/riscv.c.o"
-  "/Users/townsendsaunders3/cs61c/projects/proj2/sp18-proj2-starter/test_utils.c" "/Users/townsendsaunders3/cs61c/projects/proj2/sp18-proj2-starter/cmake-build-debug/CMakeFiles/sp18_proj2_starter.dir/test_utils.c.o"
   "/Users/townsendsaunders3/cs61c/projects/proj2/sp18-proj2-starter/utils.c" "/Users/townsendsaunders3/cs61c/projects/proj2/sp18-proj2-starter/cmake-build-debug/CMakeFiles/sp18_proj2_starter.dir/utils.c.o"
   )
 set(CMAKE_C_COMPILER_ID "AppleClang")
