@@ -249,20 +249,20 @@ void store(Byte *memory, Address address, Alignment alignment, Word value) {
 }
 
 Word load(Byte *memory, Address address, Alignment alignment) {
-    Word loaded = 0;
-    if (alignment == 4){
+    Word loaded;
+    if (alignment == LENGTH_WORD){
         Byte byte1 = memory[address];
-        Byte byte2 = memory[address +1]<<8;
-        Byte byte3 = memory[address +2]<<16;
-        Byte byte4 = memory[address +3]<<24;
+        Byte byte2 = memory[address +4]<<8;
+        Byte byte3 = memory[address +8]<<16;
+        Byte byte4 = memory[address +16]<<24;
         loaded = byte1 | byte2 | byte3 | byte4;
    }
-    else if (alignment == 2) {
+    else if (LENGTH_HALF_WORD == alignment) {
         Byte byte1 = memory[address];
-        Byte byte2 = memory[address +1]<<8;
+        Byte byte2 = memory[address + 4]<<8;
         loaded = byte1 | byte2;
     }
-    else if (alignment == 1) {
+    else if (LENGTH_BYTE == alignment) {
         Byte byte1 = memory[address];
         loaded = byte1;
     }
