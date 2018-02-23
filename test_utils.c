@@ -3,6 +3,7 @@
 #include <CUnit/Basic.h>
 #include "utils.h"
 #include "types.h"
+#include "part2.c"
 
 void test_sign_extend_number();
 void test_parse_instruction_rtype();
@@ -11,9 +12,19 @@ void test_parse_instruction_stype();
 void test_parse_instruction_sbtype();
 void test_parse_instruction_ujtype();
 void test_parse_instruction_utype();
+void test_load();
+void test_store();
 
 int main(int arc, char **argv) {
     CU_pSuite pSuite1 = NULL;
+    if(!CU_add_test(pSuite1, "test_load", test_load)) {
+        goto exit;
+    }
+
+    if(!CU_add_test(pSuite1, "test_store", test_store)) {
+        goto exit;
+    }
+
 
     if (CUE_SUCCESS != CU_initialize_registry()) {
         return CU_get_error();
@@ -128,4 +139,60 @@ void test_parse_instruction_ujtype() {
     CU_ASSERT_EQUAL(inst.ujtype.opcode, 0x6F);
     CU_ASSERT_EQUAL(inst.ujtype.rd, 1);
     CU_ASSERT_EQUAL(inst.ujtype.imm, 0);
+}
+void test_load() {
+    Byte mem[] = {0x08, 0x09, 0x10, 0x11, 0x12, 0x13, 0x14, 0x15};
+/*
+*		-----------------------------
+*		| 0x15 | 0x14 | 0x13 | 0x12 |
+*	Memory:	-----------------------------
+*		| 0x11 | 0x10 | 0x09 | 0x08 |
+*		-----------------------------
+*/
+    CU_ASSERT_EQUAL(load(mem, 4, LENGTH_WORD), 0x15141312);
+    CU_ASSERT_EQUAL(load(mem, 4, LENGTH_HALF_WORD), 0x1312);
+    CU_ASSERT_EQUAL(load(mem, 4, LENGTH_BYTE), 0x12);
+    /*printf("\n|0x%x|\n", load(mem, 4, LENGTH_WORD));       // output: 0x15141312
+    printf("|0x%x|\n", load(mem, 4, LENGTH_HALF_WORD));  // output: 0x1312
+    printf("|0x%x|\n", load(mem, 4, LENGTH_BYTE));       // output: 0x12
+     */
+}
+
+void test_store() {
+    Byte mem[] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
+    int i = 0;
+    int sizeofmem = 8;
+/* This is what we want the memory to look like!
+*		-----------------------------
+*		| 0x15 | 0x14 | 0x13 | 0x12 |
+*	Memory:	-----------------------------
+*		| 0x11 | 0x10 | 0x09 | 0x08 |
+*		-----------------------------
+*/
+    store(mem, 4, LENGTH_WORD, (Word) 0x15141312);
+    Byte refmem1[] = {0x00, 0x00, 0x00, 0x00, 0x12, 0x13, 0x14, 0x15};
+    //fprintf(stderr, "\n||FIRST||\n");
+    for (; i < sizeofmem; i++) {
+        //fprintf(stderr, "|0x%x|0x%x|\n", mem[i], refmem1[i]);
+        CU_ASSERT_EQUAL(mem[i], refmem1[i]);
+    }
+    //fprintf(stderr, "\n||SECOND||\n");
+    store(mem, 2, LENGTH_HALF_WORD, (Word) 0x1110);
+    Byte refmem2[] = {0x00, 0x00, 0x10, 0x11, 0x12, 0x13, 0x14, 0x15};
+    for (i = 0; i < sizeofmem; i++) {
+        //fprintf(stderr, "|0x%x|0x%x|\n", mem[i], refmem2[i]);
+        CU_ASSERT_EQUAL(mem[i], refmem2[i]);
+    }
+    //fprintf(stderr, "\n||THIRD||\n");
+    store(mem, 1, LENGTH_BYTE, (Word) 0x09);
+    store(mem, 0, LENGTH_BYTE, (Word) 0x08);
+    Byte refmem3[] = {0x08, 0x09, 0x10, 0x11, 0x12, 0x13, 0x14, 0x15};
+    for (i = 0; i < sizeofmem; i++) {
+        //fprintf(stderr, "|0x%x|0x%x|\n", mem[i], refmem3[i]);
+        CU_ASSERT_EQUAL(mem[i], refmem3[i]);
+    }
+    /*printf("\n|0x%x|\n", load(mem, 4, LENGTH_WORD));       // output: 0x15141312
+    printf("|0x%x|\n", load(mem, 4, LENGTH_HALF_WORD));  // output: 0x1312
+    printf("|0x%x|\n", load(mem, 4, LENGTH_BYTE));       // output: 0x12
+     */
 }
