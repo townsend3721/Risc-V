@@ -114,7 +114,7 @@ void execute_rtype(Instruction instruction, Processor *processor) {
                     break;
                 case 0x20:
                     // SRA
-                    processor->R[instruction.rtype.rd] = processor->R[instruction.rtype.rs1] >> (sWord) processor->R[instruction.rtype.rs2];
+                    processor->R[instruction.rtype.rd] = processor->R[instruction.rtype.rs1] >> (int32_t) processor->R[instruction.rtype.rs2];
                     break;
                 default:
                     handle_invalid_instruction(instruction);
