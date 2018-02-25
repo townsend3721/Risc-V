@@ -59,7 +59,6 @@ void execute_rtype(Instruction instruction, Processor *processor) {
                 case 0x0:
                     // Add
                     processor->R[instruction.rtype.rd] = processor->R[instruction.rtype.rs1] + processor->R[instruction.rtype.rs2];
-                    fprintf(stdout, "working");
                     break;
                 case 0x1:
                     // Mul
@@ -79,17 +78,17 @@ void execute_rtype(Instruction instruction, Processor *processor) {
             switch (instruction.rtype.funct7) {
                 case 0x0:
                     // SLL
-                    processor->R[instruction.rtype.rd] = processor->R[instruction.rtype.rs1] << ((sWord) processor->R[instruction.rtype.rs2]);
+                    processor->R[instruction.rtype.rd] = processor->R[instruction.rtype.rs1] << (int32_t) processor->R[instruction.rtype.rs2];
                     break;
                 case 0x1:
                     // MULH
-                    processor->R[instruction.rtype.rd] = (((sDouble)(sWord) processor->R[instruction.rtype.rs1]) * ((sDouble)(sWord) processor->R[instruction.rtype.rs2])) >> 32;
+                    processor->R[instruction.rtype.rd] = (Word) ((((sWord) processor->R[instruction.rtype.rs1]) * ((sWord) processor->R[instruction.rtype.rs2])) >> 16);
                     break;
             }
             break;
         case 0x2:
             // SLT
-            processor->R[instruction.rtype.rd] = (processor->R[instruction.rtype.rs1] < processor->R[instruction.rtype.rs2])? 1 : 0;
+            processor->R[instruction.rtype.rd] = ((sWord) processor->R[instruction.rtype.rs1] < (sWord)(sHalf) processor->R[instruction.rtype.rs2])? 1 : 0;
             break;
         case 0x4:
             switch (instruction.rtype.funct7) {
@@ -131,7 +130,7 @@ void execute_rtype(Instruction instruction, Processor *processor) {
                     break;
                 case 0x1:
                     // REM
-                    processor->R[instruction.rtype.rd] = processor->R[instruction.rtype.rs1] % processor->R[instruction.rtype.rs2];
+                    processor->R[instruction.rtype.rd] = (sWord) processor->R[instruction.rtype.rs1] % (sWord) processor->R[instruction.rtype.rs2];
                     break;
                 default:
                     handle_invalid_instruction(instruction);
@@ -151,34 +150,46 @@ void execute_rtype(Instruction instruction, Processor *processor) {
 }
 
 void execute_itype_except_load(Instruction instruction, Processor *processor) {
+    int shiftOp;
     switch (instruction.itype.funct3) {
         case 0x0:
             // ADDI
-            processor->R[instruction.itype.rd] = processor->R[instruction.itype.rs1] + sign_extend_number(processor->R[instruction.itype.imm],12);
+            processor->R[instruction.itype.rd] = processor->R[instruction.itype.rs1] + sign_extend_number(instruction.itype.imm,12);
             break;
         case 0x1:
             // SLLI
-            processor->R[instruction.itype.rd] = processor->R[instruction.itype.rs1] << sign_extend_number(processor->R[instruction.itype.imm],12);
+            processor->R[instruction.itype.rd] = processor->R[instruction.itype.rs1] << sign_extend_number(instruction.itype.imm,12);
             break;
         case 0x2:
             // STLI
-            processor->R[instruction.itype.rd] = (processor->R[instruction.itype.rs1] < sign_extend_number(processor->R[instruction.itype.imm],12))? 1 : 0;
+            processor->R[instruction.itype.rd] = ((sWord) processor->R[instruction.itype.rs1] < sign_extend_number(instruction.itype.imm,12))? 1 : 0;
             break;
         case 0x4:
             // XORI
-            processor->R[instruction.itype.rd] = processor->R[instruction.itype.rs1] ^ sign_extend_number(processor->R[instruction.itype.imm],12);
+            processor->R[instruction.itype.rd] = processor->R[instruction.itype.rs1] ^ sign_extend_number(instruction.itype.imm,12);
             break;
         case 0x5:
             // Shift Right (You must handle both logical and arithmetic)
-            processor->R[instruction.itype.rd] = processor->R[instruction.itype.rs1] >> sign_extend_number(processor->R[instruction.itype.imm],12);
+            shiftOp = instruction.itype.imm >> 10;
+            switch(shiftOp) {
+                case 0x0:
+                    processor->R[instruction.itype.rd] = processor->R[instruction.itype.rs1] >> sign_extend_number(instruction.itype.imm,12);
+                    break;
+                case 0x1:
+                    processor->R[instruction.itype.rd] = (sWord) processor->R[instruction.itype.rs1] >> instruction.itype.imm;
+                    break;
+                default :
+                    handle_invalid_instruction(instruction);
+                    break;
+            }
             break;
         case 0x6:
             // ORI
-            processor->R[instruction.itype.rd] = processor->R[instruction.itype.rs1] | sign_extend_number(processor->R[instruction.itype.imm],12);
+            processor->R[instruction.itype.rd] = processor->R[instruction.itype.rs1] | sign_extend_number(instruction.itype.imm,12);
             break;
         case 0x7:
             // ANDI
-            processor->R[instruction.itype.rd] = processor->R[instruction.itype.rs1] & sign_extend_number(processor->R[instruction.itype.imm],12);
+            processor->R[instruction.itype.rd] = processor->R[instruction.itype.rs1] & sign_extend_number(instruction.itype.imm,12);
             break;
         default:
             handle_invalid_instruction(instruction);
@@ -219,19 +230,24 @@ void execute_branch(Instruction instruction, Processor *processor) {
         case 0x0:
             // BEQ
             if (processor->R[instruction.sbtype.rs1] == processor->R[instruction.sbtype.rs2]) {
-                processor->PC = processor->PC + 4;
+                processor->PC += sign_extend_number(get_branch_offset(instruction), 12);
+            } else {
+                processor->PC += 4;
             }
             break;
         case 0x1:
             // BNE
             if (processor->R[instruction.sbtype.rs1] != processor->R[instruction.sbtype.rs2]) {
-                processor->PC = processor->PC + 4;
-                break;
-                default:
-                    handle_invalid_instruction(instruction);
-                exit(-1);
-                break;
+                processor->PC += sign_extend_number(get_branch_offset(instruction), 12);
+            } else {
+                processor->PC += 4;
             }
+            break;
+
+        default:
+            handle_invalid_instruction(instruction);
+            exit(-1);
+            break;
     }
 }
 
@@ -240,16 +256,16 @@ void execute_branch(Instruction instruction, Processor *processor) {
             case 0x0:
                 // LB
                 processor->R[instruction.itype.rd] = load(memory, processor->R[instruction.itype.rs1] + instruction.itype.imm, LENGTH_BYTE);
-                processor->R[instruction.itype.rd] = sign_extend_number(instruction.itype.rd,8);
+                processor->R[instruction.itype.rd] = sign_extend_number(processor->R[instruction.itype.rd],8);
                 break;
             case 0x1:
                 // LH
                 processor->R[instruction.itype.rd] = load(memory, processor->R[instruction.itype.rs1] + instruction.itype.imm, LENGTH_HALF_WORD);
-                processor->R[instruction.itype.rd] = sign_extend_number(instruction.itype.rd,16);
+                processor->R[instruction.itype.rd] = sign_extend_number(processor->R[instruction.itype.rd],16);
                 break;
             case 0x2:
                 // LW
-                processor->R[instruction.itype.rd] = load(memory, processor->R[instruction.itype.rs1] + instruction.itype.imm, LENGTH_WORD);
+                processor->R[instruction.itype.rd] = load(memory, processor->R[instruction.itype.rs1] + sign_extend_number(instruction.itype.imm,11), LENGTH_WORD);
                 break;
             default:
                 handle_invalid_instruction(instruction);
@@ -283,11 +299,11 @@ void execute_branch(Instruction instruction, Processor *processor) {
 
     void execute_jal(Instruction instruction, Processor *processor) {
         processor->R[instruction.ujtype.rd] = processor->PC + 4;
-        processor->PC = processor->PC + ((long) get_jump_offset(instruction));
+        processor->PC = processor->PC + ((long int) get_jump_offset(instruction));
     }
 
     void execute_lui(Instruction instruction, Processor *processor) {
-        processor->R[instruction.utype.rd] = sign_extend_number(instruction.utype.imm, 20) >> 12;
+        processor->R[instruction.utype.rd] = sign_extend_number(instruction.utype.imm, 20) << 12;
     }
 
     void store(Byte *memory, Address address, Alignment alignment, Word value) {
