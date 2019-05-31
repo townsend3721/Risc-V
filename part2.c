@@ -78,7 +78,7 @@ void execute_rtype(Instruction instruction, Processor *processor) {
             switch (instruction.rtype.funct7) {
                 case 0x0:
                     // SLL
-                    processor->R[instruction.rtype.rd] = processor->R[instruction.rtype.rs1] << (int32_t) processor->R[instruction.rtype.rs2];
+                    processor->R[instruction.rtype.rd] = processor->R[instruction.rtype.rs1] << (sWord) processor->R[instruction.rtype.rs2];
                     break;
                 case 0x1:
                     // MULH
@@ -88,7 +88,7 @@ void execute_rtype(Instruction instruction, Processor *processor) {
             break;
         case 0x2:
             // SLT
-            processor->R[instruction.rtype.rd] = ((sWord) processor->R[instruction.rtype.rs1] < (sWord)(sHalf) processor->R[instruction.rtype.rs2])? 1 : 0;
+            processor->R[instruction.rtype.rd] = (sWord) processor->R[instruction.rtype.rs1] < (sWord)(sHalf) processor->R[instruction.rtype.rs2];
             break;
         case 0x4:
             switch (instruction.rtype.funct7) {
@@ -114,7 +114,7 @@ void execute_rtype(Instruction instruction, Processor *processor) {
                     break;
                 case 0x20:
                     // SRA
-                    processor->R[instruction.rtype.rd] = processor->R[instruction.rtype.rs1] >> (int32_t) processor->R[instruction.rtype.rs2];
+                    processor->R[instruction.rtype.rd] = (sWord) processor->R[instruction.rtype.rs1] >> (sWord) processor->R[instruction.rtype.rs2];
                     break;
                 default:
                     handle_invalid_instruction(instruction);
@@ -199,7 +199,7 @@ void execute_itype_except_load(Instruction instruction, Processor *processor) {
 
 void execute_ecall(Processor *p, Byte *memory) {
     Register i;
-    
+
     // syscall number is given by a0 (x10)
     // argument is given by a1
     switch(p->R[10]) {
